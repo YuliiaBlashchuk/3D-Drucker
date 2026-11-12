@@ -1,0 +1,107 @@
+[
+    {
+        "name": "Anton",
+        "projekt_name": "D",
+        "time": 1,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:00:43.452708"
+    },
+    {
+        "name": "Lea",
+        "projekt_name": "A",
+        "time": 2,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:00:46.137090"
+    },
+    {
+        "name": "Lisa",
+        "projekt_name": "ESP Haus",
+        "time": 1,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:00:51.165583"
+    },
+    {
+        "name": "Lisa",
+        "projekt_name": "ESP Haus",
+        "time": 3,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:01:02.121388"
+    },
+    {
+        "name": "Anton",
+        "projekt_name": "Pi Home",
+        "time": 4,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:06:55.476018"
+    },
+    {
+        "name": "Lisa",
+        "projekt_name": "Topf",
+        "time": 1,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:12:13.940343"
+    },
+    {
+        "name": "Lisa",
+        "projekt_name": "Q",
+        "time": 2,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:13:38.360513"
+    },
+    {
+        "name": "Lisa",
+        "projekt_name": "G",
+        "time": 2,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:17:28.882344"
+    },
+    {
+        "name": "Anton",
+        "projekt_name": "Q",
+        "time": 4,
+        "status": "abgeschlossen",
+        "started_at": "2026-11-09T19:21:27.635587"
+    },
+    {
+        "name": "Anton",
+        "projekt_name": "Tisch",
+        "time": 2,
+        "status": "in_bearbeitung",
+        "started_at": "2026-11-09T19:27:58.590370"
+    },
+    {
+        "name": "Lea",
+        "projekt_name": "Vase",
+        "time": 1,
+        "status": "wartend",
+        "started_at": null
+    },
+    {
+        "name": "Anton",
+        "projekt_name": "Teller",
+        "time": 3,
+        "status": "wartend",
+        "started_at": null
+    },
+    {
+        "name": "Lisa",
+        "projekt_name": "Glass",
+        "time": 2,
+        "status": "wartend",
+        "started_at": null
+    },
+    {
+        "name": "Lea",
+        "projekt_name": "Bild",
+        "time": 3,
+        "status": "wartend",
+        "started_at": null
+    },
+    {
+        "name": "Lisa",
+        "projekt_name": "Tisch",
+        "time": 4,
+        "status": "wartend",
+        "started_at": null
+    }
+]

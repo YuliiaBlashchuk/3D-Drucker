@@ -1,0 +1,578 @@
+
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Druckerverwaltung</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 35px 20px;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #30364b;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* Header */
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 29px;
+            margin-bottom: 8px;
+            color: #30365a;
+        }
+
+        header p {
+            color: #858ca0;
+            font-size: 14px;
+        }
+
+        /* Cards */
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e8ebf2;
+            box-shadow: 0 3px 12px rgba(30, 45, 80, 0.04);
+        }
+
+        h2 {
+            font-size: 19px;
+            margin-top: 0;
+            margin-bottom: 22px;
+            color: #343a59;
+        }
+
+        /* Main Grid */
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-bottom: 25px;
+            align-items: stretch;
+        }
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #626b82;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dfe3ed;
+            border-radius: 7px;
+            font-size: 14px;
+            background: #fafbfe;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #7770dc;
+            box-shadow: 0 0 0 3px rgba(119, 112, 220, 0.10);
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 7px;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: #716bd4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5e58bd;
+        }
+
+        /* Message */
+
+        .message {
+            padding: 13px 16px;
+            margin-bottom: 22px;
+            background: #eeefff;
+            color: #625cbd;
+            border-left: 4px solid #716bd4;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        /* Current Project */
+
+        .current-project {
+            background: #f0f0ff;
+            border: 1px solid #e2e1fa;
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .current-project h2 {
+            color: #5550aa;
+        }
+
+        .project-name {
+            font-size: 23px;
+            font-weight: bold;
+            margin: 20px 0 12px;
+            color: #34365e;
+        }
+
+        .project-info {
+            color: #70778d;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .status {
+            display: inline-block;
+            background: #e0f5e9;
+            color: #258452;
+            padding: 6px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        /* Timer */
+
+        .timer-box {
+            background: white;
+            border: 1px solid #e4e4f2;
+            border-radius: 9px;
+            padding: 18px;
+            margin-top: 22px;
+            text-align: center;
+        }
+
+        .timer-label {
+            color: #858ba0;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        #timer {
+            font-size: 43px;
+            font-weight: bold;
+            color: #6862ca;
+            margin: 10px 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        #timer-message {
+            font-size: 13px;
+            color: #858ba0;
+        }
+
+        .btn-success {
+            width: 100%;
+            margin-top: 15px;
+            background: #299c70;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #21835e;
+        }
+
+        /* Queue */
+
+        .queue-card {
+            margin-top: 25px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f6f7fb;
+            color: #727a90;
+            font-size: 12px;
+            text-align: left;
+            padding: 14px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #edf0f5;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .time {
+            color: #7068c9;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #9097a9;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            color: #a0a6b5;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 750px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <header>
+        <h1>Druckerverwaltung</h1>
+        <p>Verwalten Sie Ihre Projekte und Druckaufträge.</p>
+    </header>
+
+
+    <!-- Message -->
+
+    {% if message %}
+        <div class="message">
+            {{ message }}
+        </div>
+    {% endif %}
+
+
+    <!-- Main Content -->
+
+    <div class="main-grid">
+
+        <!-- New Project -->
+
+        <div class="card">
+
+            <h2>Neues Projekt bestellen</h2>
+
+            <form method="POST" action="/">
+
+                <div class="form-group">
+                    <label>Ihr Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Ihr Name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Projektname</label>
+                    <input
+                        type="text"
+                        name="projekt_name"
+                        placeholder="z. B. Vase"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Projektzeit in Minuten</label>
+                    <input
+                        type="number"
+                        name="projekt_time"
+                        min="1"
+                        placeholder="30"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Projekt bestellen
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Current Project -->
+
+        <div class="card">
+
+            <h2>Aktuell in Bearbeitung</h2>
+
+            {% if current_project %}
+
+                <div class="current-project">
+
+                    <div class="project-name">
+                        {{ current_project["projekt_name"] }}
+                    </div>
+
+                    <div class="project-info">
+
+                        Benutzer:
+                        {{ current_project["name"] }}
+
+                        <br>
+
+                        Geplante Zeit:
+                        {{ current_project["time"] }} Minuten
+
+                    </div>
+
+                    <span class="status">
+                        ● In Bearbeitung
+                    </span>
+
+
+                    <!-- Timer -->
+
+                    <div class="timer-box">
+
+                        <div class="timer-label">
+                            VERBLEIBENDE ZEIT
+                        </div>
+
+                        <div id="timer"
+                             data-remaining="{{ remaining }}">
+                            --:--
+                        </div>
+
+                        <p id="timer-message">
+                            Projekt wird bearbeitet ...
+                        </p>
+
+                    </div>
+
+
+                    <!-- Collect Button -->
+
+                    <form action="/collected"
+                          method="POST"
+                          id="collect-form"
+                          style="display: none;">
+
+                        <button type="submit" class="btn-success">
+                            ✓ Projekt abgeholt
+                        </button>
+
+                    </form>
+
+                </div>
+
+            {% else %}
+
+                <div class="empty">
+                    <p>Aktuell wird kein Projekt bearbeitet.</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- Queue -->
+
+    <div class="card queue-card">
+
+        <h2>Warteschlange</h2>
+
+        {% set waiting_projects = works
+            | selectattr("status", "equalto", "wartend")
+            | list %}
+
+        {% if waiting_projects %}
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Benutzer</th>
+                            <th>Projekt</th>
+                            <th>Bearbeitungszeit</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for project in waiting_projects %}
+
+                            <tr>
+
+                                <td>{{ project["name"] }}</td>
+
+                                <td>
+                                    <strong>{{ project["projekt_name"] }}</strong>
+                                </td>
+
+                                <td class="time">
+                                    {{ project["time"] }} Minuten
+                                </td>
+
+                                <td>
+                                    <span style="color: #d29343;">
+                                        ● Wartend
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <div class="empty">
+                Keine wartenden Projekte vorhanden.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <footer>
+        Druckerverwaltung · Version 1.0
+    </footer>
+
+</div>
+
+
+<!-- Timer JavaScript -->
+
+<script>
+
+    const timer = document.getElementById("timer");
+
+    if (timer) {
+
+        let remaining = Number(timer.dataset.remaining);
+
+        const message = document.getElementById("timer-message");
+        const collectForm = document.getElementById("collect-form");
+
+
+        function updateTimer() {
+
+            if (remaining <= 0) {
+
+                timer.textContent = "00:00";
+
+                timer.style.color = "#dc5555";
+
+                message.textContent =
+                    "Bearbeitungszeit ist abgelaufen!";
+
+                collectForm.style.display = "block";
+
+                return;
+            }
+
+            const minutes = Math.floor(remaining / 60);
+            const seconds = remaining % 60;
+
+            timer.textContent =
+                String(minutes).padStart(2, "0") + ":" +
+                String(seconds).padStart(2, "0");
+
+            remaining--;
+
+        }
+
+
+        updateTimer();
+
+        const interval = setInterval(() => {
+
+            if (remaining <= 0) {
+
+                clearInterval(interval);
+
+                updateTimer();
+
+            } else {
+
+                updateTimer();
+
+            }
+
+        }, 1000);
+
+    }
+
+</script>
+
+</body>
+</html>
